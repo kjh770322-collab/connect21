@@ -1,0 +1,7 @@
+# 비밀 키와 로컬 파일은 올리지 않습니다.
+openai.php
+.env
+.env.*
+*.log
+.DS_Store
+Thumbs.db

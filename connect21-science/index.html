@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>나의 탐구 프로젝트 - 초등 과학 탐구·실험 설계</title>
+  <meta name="description" content="초등학생이 과학 탐구 과정을 따라가며 주제, 가설, 실험 계획을 스스로 세우도록 돕는 웹앱">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+
+    <header class="topbar">
+      <div class="topbar-left">
+        <a class="home-link" href="../index.html">🏠 홈으로</a>
+        <button class="icon-btn" type="button" aria-label="1단계로" onclick="goToStep(1)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="brand">
+          <span class="brand-mark">🔬</span>
+          <div>
+            <h1>나의 탐구 프로젝트</h1>
+            <p>초등 과학 탐구 · 실험 설계 도우미</p>
+          </div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="top-progress" id="top-progress-label">진행률: 17% · 현재 단계: 1/6</div>
+        <button class="btn btn-ghost" type="button" onclick="saveProject(true)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          저장
+        </button>
+        <button class="btn btn-ai" type="button" onclick="openCopilot()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5L12 3z"/><path d="M19 14l.7 2.1L22 17l-2.3.9L19 20l-.7-2.1L16 17l2.3-.9L19 14z"/></svg>
+          AI 채팅
+        </button>
+      </div>
+    </header>
+
+    <div class="app-body">
+      <aside class="sidebar">
+        <h2 class="sidebar-title">탐구 단계</h2>
+        <nav class="step-nav" id="step-nav" aria-label="탐구 단계"></nav>
+        <div class="sidebar-progress">
+          <div class="sidebar-progress-label">
+            <span>전체 진행률</span>
+            <strong id="sidebar-percent">17%</strong>
+          </div>
+          <div class="progress-track"><div class="progress-fill" id="sidebar-bar" style="width:17%"></div></div>
+          <p class="sidebar-complete" id="sidebar-complete">1/6 단계 진행 중</p>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <div class="workspace-scroll">
+
+          <!-- 1단계 -->
+          <section class="step-pane active" data-step="1">
+            <div class="step-hero">
+              <div class="step-hero-icon">🔍</div>
+              <div class="step-hero-text">
+                <h2>1단계: 탐구 주제 찾기</h2>
+                <p>관심 있는 현상을 관찰하고, 실험으로 알아볼 수 있는 주제를 고릅니다.</p>
+              </div>
+              <div class="step-hero-nav">
+                <button class="circle-nav" type="button" disabled aria-label="이전 단계">‹</button>
+                <button class="circle-nav" type="button" onclick="goToStep(2)" aria-label="다음 단계">›</button>
+              </div>
+            </div>
+
+            <div class="callout">
+              <div class="callout-kicker">Q&amp;A · 탐구 주제란?</div>
+              <p>탐구 주제는 <strong>자연에서 일어나는 일</strong>이나 <strong>궁금한 과학 문제</strong>예요. 눈으로 보거나, 자로 재거나, 실험으로 확인할 수 있는 주제를 고르면 좋아요. 지금은 정답을 찾지 않아도 됩니다. “무엇을 알아보고 싶을까?”만 생각해 보세요.</p>
+            </div>
+
+            <div class="card">
+              <label class="field-label">평소 궁금했던 것들을 써보세요</label>
+              <div class="add-row">
+                <input id="interest-input" class="text-input" type="text" maxlength="80" placeholder="예: 식물이 창가 쪽으로 기울어지는 이유">
+                <button class="btn btn-primary" type="button" onclick="addInterest()">+ 관심사 추가</button>
+              </div>
+              <div id="interest-chips" class="chips"></div>
+            </div>
+
+            <div class="card copilot-help-card">
+              <div class="card-head">
+                <h3>코파일럿에게 주제 도움받기</h3>
+                <p>정답이나 실험 방법은 알려 주지 않아요. 궁금한 것을 말하면 <strong>관찰할 수 있는 질문</strong>을 함께 찾아요.</p>
+              </div>
+              <button class="btn btn-ai-lg" type="button" onclick="openCopilotHelp('topic')">
+                ✨ 코파일럿과 주제 이야기하기
+              </button>
+            </div>
+
+            <div class="card">
+              <label class="field-label" for="topic-input">최종 탐구 주제</label>
+              <input id="topic-input" class="text-input" type="text" maxlength="120" placeholder="고른 주제를 적어 주세요." data-field="topic">
+
+              <label class="field-label" for="topic-reason">이 주제를 선택한 이유</label>
+              <textarea id="topic-reason" class="textarea" rows="4" placeholder="이 주제에 관심이 생긴 까닭을 적어 보세요. 언제, 무엇을 보고 궁금했나요?" data-field="topicReason"></textarea>
+
+              <button class="btn btn-feedback" type="button" onclick="openCopilotHelp(1)">🤖 코파일럿에게 주제 피드백 받기</button>
+            </div>
+          </section>
+
+          <!-- 2단계 -->
+          <section class="step-pane" data-step="2">
+            <div class="step-hero">
+              <div class="step-hero-icon">💡</div>
+              <div class="step-hero-text">
+                <h2>2단계: 탐구 질문과 가설</h2>
+                <p>실험으로 확인할 질문을 만들고, 이유를 붙여 예상해 봅니다.</p>
+              </div>
+              <div class="step-hero-nav">
+                <button class="circle-nav" type="button" onclick="goToStep(1)">‹</button>
+                <button class="circle-nav" type="button" onclick="goToStep(3)">›</button>
+              </div>
+            </div>
+
+            <div class="callout">
+              <div class="callout-kicker">Q&amp;A · 질문과 가설이란?</div>
+              <p><strong>탐구 질문</strong>은 “~하면 ~할까?”처럼 실험으로 알아볼 수 있는 질문이에요.<br>
+              <strong>가설</strong>은 실험 전에 “아마 이렇게 될 것 같아. 왜냐하면 ~”라고 예상하는 말이에요. 맞으면 좋고, 달라도 실패가 아니에요. <strong>증거가 알려 주는 것</strong>이 과학이에요.</p>
+            </div>
+
+            <div class="card">
+              <label class="field-label" for="question-input">탐구 질문</label>
+              <input id="question-input" class="text-input" type="text" maxlength="160" placeholder="예: 물이 많을수록 콩나물은 더 빨리 자랄까?" data-field="question">
+              <p class="hint">힌트: “왜?”만 있으면 실험하기 어려워요. “무엇을 바꾸면, 무엇이 달라질까?”로 바꿔 보세요.</p>
+            </div>
+
+            <div class="var-grid">
+              <div class="var-card">
+                <span class="var-badge change">바꿀 것</span>
+                <h3>내가 다르게 할 것</h3>
+                <p>비교하려고 바꾸는 한 가지예요. (독립 변인)</p>
+                <input class="text-input" type="text" placeholder="예: 물의 양" data-field="independentVar">
+              </div>
+              <div class="var-card">
+                <span class="var-badge measure">잴 것</span>
+                <h3>내가 재거나 관찰할 것</h3>
+                <p>달라지는지 확인하는 것이에요. (종속 변인)</p>
+                <input class="text-input" type="text" placeholder="예: 콩나물의 키(cm)" data-field="dependentVar">
+              </div>
+            </div>
+
+            <div class="card">
+              <label class="field-label">가설 (만약 ~ 하면, ~ 할 것이다. 왜냐하면 ~)</label>
+              <div class="hypo-row"><span>만약</span><input class="text-input" type="text" placeholder="물을 더 많이 주면" data-field="hypothesisIf"></div>
+              <div class="hypo-row"><span>그러면</span><input class="text-input" type="text" placeholder="콩나물이 더 빨리 자랄 것이다" data-field="hypothesisThen"></div>
+              <div class="hypo-row"><span>왜냐하면</span><textarea class="textarea" rows="3" placeholder="내가 알고 있는 사실이나 관찰한 것을 이유로 적어 보세요. 추측만 쓰지 말고, 왜 그렇게 생각하는지 말해 보세요." data-field="hypothesisBecause"></textarea></div>
+              <button class="btn btn-feedback" type="button" onclick="openCopilotHelp(2)">🤖 코파일럿에게 질문·가설 도움받기</button>
+            </div>
+          </section>
+
+          <!-- 3단계 -->
+          <section class="step-pane" data-step="3">
+            <div class="step-hero">
+              <div class="step-hero-icon">🧪</div>
+              <div class="step-hero-text">
+                <h2>3단계: 실험 계획하기</h2>
+                <p>하나만 바꾸고 나머지는 같게 하는 공정한 실험을 설계합니다.</p>
+              </div>
+              <div class="step-hero-nav">
+                <button class="circle-nav" type="button" onclick="goToStep(2)">‹</button>
+                <button class="circle-nav" type="button" onclick="goToStep(4)">›</button>
+              </div>
+            </div>
+
+            <div class="callout">
+              <div class="callout-kicker">Q&amp;A · 공정한 실험이란?</div>
+              <p>공정한 실험은 <strong>알아보고 싶은 것 하나만 바꾸고</strong>, 온도와 시간처럼 다른 조건은 <strong>같게</strong> 하는 실험이에요. 여러 번 반복하면 “어쩌다 한 번”인지 “정말 그런지”를 더 잘 알 수 있어요. 절차는 여러분이 직접 적어요. AI는 빠진 점을 질문으로만 알려 줍니다.</p>
+            </div>
+
+            <div class="card">
+              <label class="field-label" for="controlled-input">똑같이 할 것 (통제 변인)</label>
+              <textarea id="controlled-input" class="textarea" rows="3" placeholder="예: 같은 종류의 콩, 같은 화분, 같은 장소, 같은 시간 동안 관찰" data-field="controlledVars"></textarea>
+            </div>
+
+            <div class="split">
+              <div class="card">
+                <label class="field-label">준비물</label>
+                <div class="add-row">
+                  <input id="material-input" class="text-input" type="text" placeholder="예: 투명 컵 3개, 자">
+                  <button class="btn btn-primary" type="button" onclick="addListItem('materials')">추가</button>
+                </div>
+                <ul id="materials-list" class="item-list"></ul>
+              </div>
+              <div class="card">
+                <label class="field-label">반복 횟수</label>
+                <input class="text-input" type="text" placeholder="예: 각 조건마다 3번씩" data-field="repeats">
+                <label class="field-label" for="safety-input">안전 약속</label>
+                <textarea id="safety-input" class="textarea" rows="3" placeholder="예: 뜨거운 물은 쓰지 않는다. 선생님과 함께한다." data-field="safety"></textarea>
+              </div>
+            </div>
+
+            <div class="card">
+              <label class="field-label">실험 순서 (내가 할 일을 차례대로)</label>
+              <div class="add-row">
+                <input id="procedure-input" class="text-input" type="text" placeholder="예: 컵에 물을 50mL, 100mL, 150mL씩 넣는다">
+                <button class="btn btn-primary" type="button" onclick="addListItem('procedure')">순서 추가</button>
+              </div>
+              <ol id="procedure-list" class="item-list numbered"></ol>
+              <button class="btn btn-feedback" type="button" onclick="openCopilotHelp(3)">🤖 코파일럿에게 실험 계획 도움받기</button>
+            </div>
+          </section>
+
+          <!-- 4단계 -->
+          <section class="step-pane" data-step="4">
+            <div class="step-hero">
+              <div class="step-hero-icon">📊</div>
+              <div class="step-hero-text">
+                <h2>4단계: 결과 정리 및 결론</h2>
+                <p>관찰한 사실을 표로 정리하고, 증거로 결론을 말합니다.</p>
+              </div>
+              <div class="step-hero-nav">
+                <button class="circle-nav" type="button" onclick="goToStep(3)">‹</button>
+                <button class="circle-nav" type="button" onclick="goToStep(5)">›</button>
+              </div>
+            </div>
+
+            <div class="callout">
+              <div class="callout-kicker">Q&amp;A · 결론이란?</div>
+              <p>결론은 “내가 맞았다”가 아니에요. <strong>표에 적힌 숫자와 관찰</strong>을 보고 “무엇이 달라졌는지”를 말하는 것이에요. 가설과 달라도 괜찮아요. 그때는 “증거가 가설과 달랐다”고 쓰면 더 좋은 과학이에요.</p>
+            </div>
+
+            <div class="card">
+              <div class="card-head">
+                <h3>관찰 기록표</h3>
+                <p>조건마다 여러 번 재 보세요. 빈칸은 아직 안 한 실험이에요. 꾸며 쓰지 말고 본 그대로 적어요.</p>
+              </div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>조건 (바꾼 것)</th>
+                      <th>1회</th>
+                      <th>2회</th>
+                      <th>3회</th>
+                      <th>관찰 메모</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="result-body"></tbody>
+                </table>
+              </div>
+              <button class="btn btn-ghost" type="button" onclick="addResultRow()">+ 조건 행 추가</button>
+            </div>
+
+            <div class="card">
+              <label class="field-label" for="observation-input">내가 본 것 (사실만)</label>
+              <textarea id="observation-input" class="textarea" rows="3" placeholder="숫자와 변화를 사실대로 적어요. ‘멋지다’보다 ‘3일 뒤 2cm 자랐다’가 좋아요." data-field="observation"></textarea>
+
+              <label class="field-label">가설과 비교하면?</label>
+              <div class="choice-row" id="hypothesis-check">
+                <button type="button" class="choice-chip" data-value="supported">증거가 가설과 비슷해요</button>
+                <button type="button" class="choice-chip" data-value="not-supported">증거가 가설과 달라요</button>
+                <button type="button" class="choice-chip" data-value="unsure">아직 잘 모르겠어요</button>
+              </div>
+
+              <label class="field-label" for="evidence-input">결론을 뒷받침하는 증거</label>
+              <textarea id="evidence-input" class="textarea" rows="3" placeholder="표의 어느 숫자를 보고 그렇게 말했나요?" data-field="evidence"></textarea>
+
+              <label class="field-label" for="conclusion-input">나의 결론</label>
+              <textarea id="conclusion-input" class="textarea" rows="3" placeholder="증거에 기대어 한두 문장으로 적어 보세요." data-field="conclusion"></textarea>
+
+              <button class="btn btn-feedback" type="button" onclick="openCopilotHelp(4)">🤖 코파일럿에게 결과·결론 도움받기</button>
+            </div>
+          </section>
+
+          <!-- 5단계 -->
+          <section class="step-pane" data-step="5">
+            <div class="step-hero">
+              <div class="step-hero-icon">🖥️</div>
+              <div class="step-hero-text">
+                <h2>5단계: 탐구 발표 준비</h2>
+                <p>다른 사람이 따라 할 수 있게, 과정과 증거를 순서대로 정리합니다.</p>
+              </div>
+              <div class="step-hero-nav">
+                <button class="circle-nav" type="button" onclick="goToStep(4)">‹</button>
+                <button class="circle-nav" type="button" onclick="goToStep(6)">›</button>
+              </div>
+            </div>
+
+            <div class="callout">
+              <div class="callout-kicker">Q&amp;A · 좋은 탐구 발표란?</div>
+              <p>발표는 자랑이 아니라 <strong>증거 나누기</strong>예요. “무엇을 궁금했고, 어떻게 공정하게 실험했고, 무엇을 봤고, 그 증거가 무엇을 말하는지”를 짧게 말하면 좋아요. 대본을 AI가 대신 쓰지 않아요. 뼈대만 스스로 채워 보세요.</p>
+            </div>
+
+            <div class="present-grid">
+              <div class="card">
+                <label class="field-label">발표 제목</label>
+                <input class="text-input" type="text" placeholder="주제를 한 줄로" data-field="presentTitle">
+                <label class="field-label">첫 마디 (왜 궁금했나)</label>
+                <textarea class="textarea" rows="3" placeholder="친구들이 귀를 기울일 궁금증을 한 문장으로" data-field="presentHook"></textarea>
+              </div>
+              <div class="card">
+                <label class="field-label">방법 요약 (공정하게 한 점)</label>
+                <textarea class="textarea" rows="4" placeholder="무엇을 바꾸고, 무엇을 같게 했나요? 몇 번 반복했나요?" data-field="presentMethod"></textarea>
+              </div>
+              <div class="card">
+                <label class="field-label">결과에서 보여 줄 것</label>
+                <textarea class="textarea" rows="4" placeholder="표의 어느 숫자? 사진이나 그림이 있다면 무엇을 보여 줄까요?" data-field="presentResult"></textarea>
+              </div>
+              <div class="card">
+                <label class="field-label">한 줄 메시지</label>
+                <textarea class="textarea" rows="4" placeholder="증거가 말해 주는 것을 한 문장으로. 정답을 단정하지 않아도 됩니다." data-field="presentMessage"></textarea>
+              </div>
+            </div>
+
+            <div class="card preview-card" id="present-preview">
+              <h3>나의 발표 뼈대</h3>
+              <div id="present-preview-body" class="preview-body">아직 적은 내용이 없어요. 칸을 채우면 여기에 모여요.</div>
+              <button class="btn btn-feedback" type="button" onclick="openCopilotHelp(5)">🤖 코파일럿에게 발표 도움받기</button>
+            </div>
+          </section>
+
+          <!-- 6단계 -->
+          <section class="step-pane" data-step="6">
+            <div class="step-hero">
+              <div class="step-hero-icon">💗</div>
+              <div class="step-hero-text">
+                <h2>6단계: 성찰하기</h2>
+                <p>잘한 과학 습관과 다음에 더 공정하게 할 점을 돌아봅니다.</p>
+              </div>
+              <div class="step-hero-nav">
+                <button class="circle-nav" type="button" onclick="goToStep(5)">‹</button>
+                <button class="circle-nav" type="button" disabled>›</button>
+              </div>
+            </div>
+
+            <div class="callout">
+              <div class="callout-kicker">Q&amp;A · 성찰이란?</div>
+              <p>성찰은 “잘했다/못했다” 점수가 아니에요. <strong>무엇을 관찰했고, 무엇이 어려웠고, 다음에 무엇을 더 같게 둘지</strong>를 생각하는 시간이에요. 새로운 질문이 생기면, 그것이 다음 탐구의 씨앗이 됩니다.</p>
+            </div>
+
+            <div class="card">
+              <label class="field-label">내가 잘한 과학 습관</label>
+              <textarea class="textarea" rows="3" placeholder="예: 세 번 반복해서 쟀다. 본 것만 표에 적었다." data-field="reflectGood"></textarea>
+              <label class="field-label">어려웠던 점</label>
+              <textarea class="textarea" rows="3" placeholder="예: 컵마다 햇빛이 조금 달랐다." data-field="reflectHard"></textarea>
+              <label class="field-label">다음에 더 공정하게 할 점</label>
+              <textarea class="textarea" rows="3" placeholder="예: 자리를 바꿔 가며 같은 빛을 받게 하겠다." data-field="reflectNext"></textarea>
+              <label class="field-label">새로 생긴 질문</label>
+              <textarea class="textarea" rows="3" placeholder="이번 탐구를 하면서 또 궁금해진 것이 있나요?" data-field="reflectNewQ"></textarea>
+              <button class="btn btn-feedback" type="button" onclick="openCopilotHelp(6)">🤖 코파일럿에게 성찰 도움받기</button>
+            </div>
+
+            <div class="card certificate" id="certificate">
+              <p class="certificate-kicker">탐구 과정 완주</p>
+              <h3>나는 증거를 찾아가는 탐구자예요</h3>
+              <p id="certificate-text">주제부터 성찰까지 과정을 따라왔어요. 정답을 맞히는 것보다, 관찰하고 비교하고 이유를 묻는 일이 과학입니다.</p>
+              <div class="certificate-actions">
+                <button class="btn btn-ghost" type="button" onclick="printProject()">🖨️ 탐구 일지 인쇄</button>
+                <button class="btn btn-primary" type="button" onclick="saveProject(true)">💾 저장하기</button>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <footer class="step-footer">
+          <button class="btn btn-prev" id="btn-prev" type="button" onclick="goPrev()">이전</button>
+          <div class="footer-center">
+            <button class="btn btn-ghost" type="button" onclick="saveProject(true)">저장</button>
+            <button class="btn btn-ai" type="button" onclick="openCopilot()">✨ AI 채팅</button>
+          </div>
+          <button class="btn btn-next" id="btn-next" type="button" onclick="goNext()">다음</button>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <div id="copilot-modal" class="copilot-modal" hidden>
+    <div class="copilot-panel">
+      <div class="copilot-head">
+        <div>
+          <h3>탐구 도우미 AI 채팅</h3>
+          <p>정답 대신, 생각할 질문을 함께 찾아요</p>
+        </div>
+        <button class="icon-btn light" type="button" onclick="closeCopilot()" aria-label="닫기">×</button>
+      </div>
+      <div class="copilot-hints" id="copilot-hints"></div>
+      <div class="copilot-frame">
+        <iframe
+          title="Microsoft Copilot Studio 과학 탐구 챗봇"
+          src="https://copilotstudio.microsoft.com/environments/9324e73a-cd4e-e049-b7ba-177af6165e9c/bots/crbf2_untitledagent_Moykf0/webchat?__version__=2&enableFileAttachment=false&cliAgent=true"
+          frameborder="0"></iframe>
+      </div>
+      <p class="copilot-note">대화가 안 되면 Copilot Studio 설정 → 보안 → 인증을 ‘인증 없음’으로 바꾼 뒤 게시를 눌러 주세요.</p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>

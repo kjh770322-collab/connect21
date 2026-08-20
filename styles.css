@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&family=Noto+Sans+KR:wght@400;600;700;800&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #1e293b;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(58, 155, 103, 0.16), transparent 32%),
+    radial-gradient(circle at 88% 12%, rgba(255, 107, 107, 0.16), transparent 30%),
+    radial-gradient(circle at 70% 86%, rgba(37, 99, 235, 0.16), transparent 34%),
+    linear-gradient(160deg, #f8fafc 0%, #eef6ff 100%);
+  min-height: 100vh;
+}
+
+.home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.4rem 3rem;
+}
+
+.home-header {
+  text-align: center;
+  margin-bottom: 2.4rem;
+}
+
+.kicker {
+  display: inline-block;
+  background: #fff;
+  color: #475569;
+  font-weight: 800;
+  font-size: 0.86rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 0.85rem;
+}
+
+.home-header h1 {
+  font-family: 'Jua', sans-serif;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  letter-spacing: 0.04em;
+  color: #0f172a;
+}
+
+.lead {
+  font-family: 'Gowun Dodum', sans-serif;
+  font-size: 1.15rem;
+  color: #64748b;
+  margin-top: 0.55rem;
+}
+
+.subject-grid {
+  width: min(1080px, 100%);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+
+.subject-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  padding: 2rem 1.4rem;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 32px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+
+.subject-btn:hover,
+.subject-btn:focus-visible {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 26px 48px rgba(15, 23, 42, 0.2);
+}
+
+.subject-btn:focus-visible {
+  outline: 3px solid #0f172a;
+  outline-offset: 4px;
+}
+
+.subject-emoji {
+  font-size: 3.4rem;
+  line-height: 1;
+  margin-bottom: 0.9rem;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.12));
+}
+
+.subject-name {
+  font-family: 'Jua', sans-serif;
+  font-size: 2.6rem;
+  margin-bottom: 0.45rem;
+}
+
+.subject-desc {
+  font-size: 1rem;
+  line-height: 1.5;
+  opacity: 0.94;
+  word-break: keep-all;
+  max-width: 16em;
+}
+
+.subject-btn.moral {
+  background: linear-gradient(160deg, #4db67d 0%, #236b44 100%);
+}
+
+.subject-btn.art {
+  background: linear-gradient(160deg, #ff8585 0%, #d93838 100%);
+}
+
+.subject-btn.science {
+  background: linear-gradient(160deg, #4f8ef7 0%, #1d4ed8 100%);
+}
+
+@media (max-width: 860px) {
+  .subject-grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+  }
+
+  .subject-btn {
+    min-height: 180px;
+  }
+}

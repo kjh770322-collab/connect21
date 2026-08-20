@@ -1,0 +1,1119 @@
+/* ==========================================================================
+   도덕 마인드 숲 (Moral Mind Forest) - Style Sheet
+   Designed for Elementary Moral Reflection & Scaffolding
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&family=Noto+Sans+KR:wght@400;500;700;800&display=swap');
+
+:root {
+  /* Color Palette */
+  --primary-green: #3A9B67;
+  --primary-light: #EBF7EE;
+  --primary-dark: #236B44;
+  --accent-amber: #FF9F1C;
+  --accent-soft-amber: #FFF4E5;
+  --sky-blue: #3A86FF;
+  --sky-blue-light: #EEF4FF;
+  --soft-violet: #8338EC;
+  --soft-violet-light: #F3E8FF;
+  --soft-pink: #FF006E;
+  --soft-pink-light: #FFEBF2;
+  
+  /* Text & Backgrounds */
+  --bg-gradient: linear-gradient(135deg, #F5FBF6 0%, #EFF6FC 50%, #F8F5FE 100%);
+  --card-bg: #FFFFFF;
+  --text-main: #2D3748;
+  --text-muted: #718096;
+  --border-color: #E2E8F0;
+  
+  /* Shadows & Radius */
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 25px rgba(58, 155, 103, 0.1);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.12);
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+}
+
+/* Header & Navigation */
+.app-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid rgba(58, 155, 103, 0.15);
+  box-shadow: var(--shadow-sm);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.logo-icon {
+  font-size: 2.2rem;
+  background: var(--primary-light);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 3px rgba(58, 155, 103, 0.2);
+}
+
+.logo-title {
+  font-family: 'Jua', sans-serif;
+  font-size: 1.8rem;
+  color: var(--primary-dark);
+  letter-spacing: -0.5px;
+}
+
+.logo-subtitle {
+  font-size: 0.85rem;
+  color: var(--primary-green);
+  font-weight: 700;
+  background: var(--primary-light);
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+
+.home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  text-decoration: none;
+  font-family: 'Gowun Dodum', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--primary-dark);
+  background: var(--primary-light);
+  border: 2px solid rgba(58, 155, 103, 0.25);
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.home-link:hover {
+  background: var(--primary-green);
+  color: white;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 0.5rem;
+  background: #F0F4F2;
+  padding: 6px;
+  border-radius: 40px;
+}
+
+.nav-btn {
+  border: none;
+  background: transparent;
+  padding: 0.65rem 1.2rem;
+  border-radius: 30px;
+  font-family: 'Gowun Dodum', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-btn:hover {
+  color: var(--primary-dark);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.nav-btn.active {
+  background: var(--primary-green);
+  color: white;
+  box-shadow: 0 4px 12px rgba(58, 155, 103, 0.3);
+}
+
+/* Main Layout Container */
+.main-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  width: 100%;
+  flex: 1;
+}
+
+/* Tab Page Views */
+.tab-content {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Page Banner */
+.page-banner {
+  background: linear-gradient(135deg, var(--primary-green) 0%, #2A7B50 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.page-banner::after {
+  content: '🌿';
+  position: absolute;
+  right: 20px;
+  bottom: -20px;
+  font-size: 8rem;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.banner-title {
+  font-family: 'Jua', sans-serif;
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.banner-desc {
+  font-size: 1.1rem;
+  opacity: 0.95;
+  max-width: 750px;
+  word-break: keep-all;
+}
+
+/* Auth Troubleshooting Banner */
+.auth-warning-banner {
+  background: #FFFBEB;
+  border: 2px dashed #F59E0B;
+  border-radius: var(--radius-md);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.auth-banner-title {
+  font-family: 'Jua', sans-serif;
+  font-size: 1.25rem;
+  color: #B45309;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.auth-banner-desc {
+  font-size: 0.95rem;
+  color: #78350F;
+  line-height: 1.6;
+}
+
+/* Moral Concepts Cards Grid */
+.concept-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+.concept-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  padding: 1.8rem;
+  box-shadow: var(--shadow-sm);
+  border: 2px solid transparent;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.concept-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-green);
+}
+
+.concept-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.concept-badge-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.concept-title-box h3 {
+  font-family: 'Jua', sans-serif;
+  font-size: 1.5rem;
+  color: var(--text-main);
+}
+
+.concept-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 12px;
+  display: inline-block;
+  margin-top: 2px;
+}
+
+.concept-body {
+  flex: 1;
+}
+
+.concept-def {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #4A5568;
+  margin-bottom: 1rem;
+  background: #F8FAFC;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--primary-green);
+}
+
+.dilemma-box {
+  background: #FFFBEB;
+  border: 1px dashed #FCD34D;
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1rem;
+}
+
+.dilemma-title {
+  font-family: 'Gowun Dodum', sans-serif;
+  font-weight: 700;
+  color: #D97706;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dilemma-text {
+  font-size: 0.95rem;
+  color: #78350F;
+}
+
+/* Scaffolding Hint Box */
+.scaffold-hint-box {
+  background: var(--primary-light);
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-sm);
+  margin-top: 0.5rem;
+}
+
+.scaffold-hint-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--primary-dark);
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.scaffold-hint-text {
+  font-size: 0.92rem;
+  color: #276749;
+}
+
+.card-action-btn {
+  margin-top: 1.2rem;
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  background: var(--primary-green);
+  color: white;
+  font-family: 'Gowun Dodum', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.card-action-btn:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 4px 12px rgba(35, 107, 68, 0.3);
+}
+
+/* ==========================================================================
+   2. Scaffolding Reflection Worksheet Section
+   ========================================================================== */
+.worksheet-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 2.2rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Step Wizard Navigation */
+.step-wizard {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.step-wizard::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 40px;
+  right: 40px;
+  height: 4px;
+  background: #E2E8F0;
+  z-index: 1;
+}
+
+.step-progress-bar {
+  position: absolute;
+  top: 24px;
+  left: 40px;
+  height: 4px;
+  background: var(--primary-green);
+  z-index: 1;
+  transition: width 0.3s ease;
+  width: 0%;
+}
+
+.step-item {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.step-number {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Jua', sans-serif;
+  font-size: 1.3rem;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.step-item.active .step-number {
+  border-color: var(--primary-green);
+  background: var(--primary-green);
+  color: white;
+  box-shadow: 0 0 0 5px rgba(58, 155, 103, 0.2);
+}
+
+.step-item.completed .step-number {
+  border-color: var(--primary-green);
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.step-label {
+  font-family: 'Gowun Dodum', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.step-item.active .step-label {
+  color: var(--primary-dark);
+}
+
+/* Step Form Section */
+.step-pane {
+  display: none;
+}
+
+.step-pane.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+.pane-title-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px dashed #E2E8F0;
+}
+
+.pane-title-box h3 {
+  font-family: 'Jua', sans-serif;
+  font-size: 1.6rem;
+  color: var(--primary-dark);
+}
+
+/* Form Controls */
+.form-group {
+  margin-bottom: 1.8rem;
+}
+
+.form-label {
+  display: block;
+  font-family: 'Gowun Dodum', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  color: var(--text-main);
+}
+
+.concept-select-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.chip-btn {
+  border: 2px solid #E2E8F0;
+  background: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.chip-btn:hover, .chip-btn.selected {
+  border-color: var(--primary-green);
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.form-textarea {
+  width: 100%;
+  min-height: 130px;
+  padding: 1rem;
+  border: 2px solid #E2E8F0;
+  border-radius: var(--radius-md);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1rem;
+  color: var(--text-main);
+  resize: vertical;
+  transition: var(--transition);
+}
+
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 4px rgba(58, 155, 103, 0.15);
+}
+
+/* Scaffolding Sentence Starters Container */
+.scaffolding-box {
+  background: var(--soft-violet-light);
+  border: 2px dashed #C4B5FD;
+  border-radius: var(--radius-md);
+  padding: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.scaffolding-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.scaffolding-title {
+  font-family: 'Jua', sans-serif;
+  font-size: 1.1rem;
+  color: var(--soft-violet);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.starter-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.starter-btn {
+  border: none;
+  background: white;
+  text-align: left;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-sm);
+  font-family: 'Gowun Dodum', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #5B21B6;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.starter-btn:hover {
+  background: #F3E8FF;
+  transform: translateX(4px);
+  color: #4C1D95;
+}
+
+/* Emotion Selection Grid */
+.emotion-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.emotion-card {
+  border: 2px solid #E2E8F0;
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 0.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  background: white;
+}
+
+.emotion-card:hover, .emotion-card.selected {
+  border-color: var(--accent-amber);
+  background: var(--accent-soft-amber);
+  transform: scale(1.03);
+}
+
+.emotion-emoji {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.emotion-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* Step Wizard Buttons */
+.step-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid #E2E8F0;
+}
+
+.btn-secondary {
+  border: 2px solid #CBD5E0;
+  background: white;
+  color: var(--text-muted);
+  font-family: 'Gowun Dodum', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-secondary:hover {
+  border-color: var(--text-muted);
+  color: var(--text-main);
+}
+
+.btn-primary {
+  border: none;
+  background: var(--primary-green);
+  color: white;
+  font-family: 'Gowun Dodum', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 0.75rem 1.8rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px rgba(58, 155, 103, 0.25);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.btn-chatbot-scaffold {
+  background: linear-gradient(135deg, var(--soft-violet) 0%, #6D28D9 100%);
+  color: white;
+  border: none;
+  font-family: 'Gowun Dodum', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.btn-chatbot-scaffold:hover {
+  transform: scale(1.04);
+  box-shadow: 0 4px 15px rgba(131, 56, 236, 0.35);
+}
+
+/* ==========================================================================
+   3. Chatbot Tab & Floating Modal Section
+   ========================================================================== */
+.chatbot-container-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 720px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.chatbot-header-bar {
+  background: linear-gradient(135deg, #4F46E5 0%, #3B82F6 100%);
+  color: white;
+  padding: 1.2rem 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chatbot-title {
+  font-family: 'Jua', sans-serif;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.chatbot-subtitle {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.quick-prompts-bar {
+  background: #F1F5F9;
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  border-bottom: 1px solid #E2E8F0;
+  white-space: nowrap;
+}
+
+.quick-prompt-chip {
+  border: 1px solid #CBD5E1;
+  background: white;
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.quick-prompt-chip:hover {
+  background: #E0E7FF;
+  border-color: #818CF8;
+  color: #3730A3;
+}
+
+.iframe-wrapper {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #FFFFFF;
+}
+
+.iframe-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Floating Chatbot Widget Modal */
+.floating-chatbot-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--soft-violet) 0%, #4F46E5 100%);
+  color: white;
+  border: none;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+  z-index: 999;
+  transition: var(--transition);
+}
+
+.floating-chatbot-btn:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.floating-chatbot-btn .badge-pulse {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 18px;
+  height: 18px;
+  background: var(--accent-amber);
+  border-radius: 50%;
+  border: 3px solid white;
+}
+
+.floating-chatbot-modal {
+  position: fixed;
+  bottom: 6rem;
+  right: 2rem;
+  width: 420px;
+  height: 600px;
+  max-width: calc(100vw - 3rem);
+  max-height: calc(100vh - 8rem);
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  border: 2px solid rgba(131, 56, 236, 0.2);
+  animation: modalUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalUp {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.floating-chatbot-modal.open {
+  display: flex;
+}
+
+.modal-header {
+  background: linear-gradient(135deg, var(--soft-violet) 0%, #4F46E5 100%);
+  color: white;
+  padding: 0.9rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-header h4 {
+  font-family: 'Jua', sans-serif;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.close-modal-btn {
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-modal-btn:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* ==========================================================================
+   4. Reflection History & Badges Section
+   ========================================================================== */
+.history-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.badges-card {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 1.8rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.badges-header {
+  font-family: 'Jua', sans-serif;
+  font-size: 1.4rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.badge-item {
+  border: 2px dashed #E2E8F0;
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  text-align: center;
+  background: #F8FAFC;
+  opacity: 0.6;
+  transition: var(--transition);
+}
+
+.badge-item.unlocked {
+  border: 2px solid var(--accent-amber);
+  background: var(--accent-soft-amber);
+  opacity: 1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 159, 28, 0.2);
+}
+
+.badge-icon-img {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.badge-name {
+  font-family: 'Gowun Dodum', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-main);
+}
+
+.badge-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.history-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.history-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.history-card {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border-left: 6px solid var(--primary-green);
+  transition: var(--transition);
+}
+
+.history-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid #F1F5F9;
+  padding-bottom: 0.6rem;
+}
+
+.history-date {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.history-concept-badge {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-family: 'Gowun Dodum', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 4px 12px;
+  border-radius: 15px;
+}
+
+.history-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .history-body-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.history-box {
+  background: #F8FAFC;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-sm);
+}
+
+.history-box-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+}
+
+.history-box-content {
+  font-size: 0.98rem;
+  color: var(--text-main);
+  word-break: keep-all;
+}
+
+.history-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.btn-sm-delete {
+  border: none;
+  background: #FEE2E2;
+  color: #EF4444;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-sm-delete:hover {
+  background: #FCA5A5;
+  color: #991B1B;
+}
+
+.empty-history {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 3rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  font-size: 3.5rem;
+  display: block;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+/* Footer */
+.app-footer {
+  background: white;
+  border-top: 1px solid #E2E8F0;
+  padding: 1.5rem 0;
+  margin-top: auto;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Print Styling for Reflection Worksheet Hand-in */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  .app-header, .nav-tabs, .step-wizard, .step-actions, .floating-chatbot-btn, .floating-chatbot-modal, .quick-prompts-bar {
+    display: none !important;
+  }
+  .worksheet-card {
+    box-shadow: none;
+    border: none;
+    padding: 0;
+  }
+  .step-pane {
+    display: block !important;
+    margin-bottom: 2rem;
+  }
+}

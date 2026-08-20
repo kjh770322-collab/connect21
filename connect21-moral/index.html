@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>도덕 마인드 숲 - 어린이 도덕적 성찰 & 비계 학습 웹앱</title>
+  <meta name="description" content="초등학교 학생들을 위한 도덕적 개념 설명, 단계별 성찰 비계 워크시트 및 Copilot Studio AI 챗봇 통합 플랫폼">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- App Header & Navigation -->
+  <header class="app-header">
+    <div class="header-container">
+      <a href="#" class="logo-area">
+        <div class="logo-icon">🌿</div>
+        <div>
+          <h1 class="logo-title">도덕 마인드 숲</h1>
+          <span class="logo-subtitle">초등 도덕 성찰 & 비계 학습</span>
+        </div>
+      </a>
+
+      <nav class="nav-tabs">
+        <button class="nav-btn active" data-tab="tab-concepts">
+          <span>📚</span> 도덕 개념 & 자료실
+        </button>
+        <button class="nav-btn" data-tab="tab-worksheet">
+          <span>✍️</span> 단계별 성찰 비계
+        </button>
+        <button class="nav-btn" data-tab="tab-chatbot">
+          <span>🤖</span> AI 도덕 도우미 챗봇
+        </button>
+        <button class="nav-btn" data-tab="tab-history">
+          <span>🏅</span> 성찰 일지 & 뱃지
+        </button>
+      </nav>
+      <a href="../index.html" class="home-link">🏠 홈으로</a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <!-- ==========================================================================
+         TAB 1: 도덕 개념 & 교육 자료실
+         ========================================================================== -->
+    <section id="tab-concepts" class="tab-content active">
+      <div class="page-banner">
+        <h2 class="banner-title">도덕적 개념 탐구 & 성찰 질문 🌿</h2>
+        <p class="banner-desc">
+          배려, 정직, 책임 등 우리 삶에 필요한 도덕 가치를 배우고 일상속 딜레마 사례에 대해 비계(Scaffolding) 질문으로 생각해 보세요!
+        </p>
+      </div>
+
+      <div id="concept-cards-container" class="concept-grid">
+        <!-- Rendered via app.js -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TAB 2: 단계별 성찰 비계 워크시트 (4-Step Scaffolding Tool)
+         ========================================================================== -->
+    <section id="tab-worksheet" class="tab-content">
+      <div class="page-banner" style="background: linear-gradient(135deg, #3A86FF 0%, #2563EB 100%);">
+        <h2 class="banner-title">단계별 도덕 성찰 워크시트 ✍️</h2>
+        <p class="banner-desc">
+          힌트 문장(비계)을 활용하여 있었던 일을 되돌아보고, 상대방의 마음을 이해하며 내일의 실천 다짐을 적어봅시다.
+        </p>
+      </div>
+
+      <div class="worksheet-card">
+        
+        <!-- Step Progress Wizard Bar -->
+        <div class="step-wizard">
+          <div id="step-progress-bar" class="step-progress-bar"></div>
+          
+          <div id="step-item-1" class="step-item active" onclick="goToStep(1)">
+            <div class="step-number">1</div>
+            <div class="step-label">상황 발견</div>
+          </div>
+          
+          <div id="step-item-2" class="step-item" onclick="goToStep(2)">
+            <div class="step-number">2</div>
+            <div class="step-label">마음 감지</div>
+          </div>
+          
+          <div id="step-item-3" class="step-item" onclick="goToStep(3)">
+            <div class="step-number">3</div>
+            <div class="step-label">도덕 성찰</div>
+          </div>
+          
+          <div id="step-item-4" class="step-item" onclick="goToStep(4)">
+            <div class="step-number">4</div>
+            <div class="step-label">실천 다짐</div>
+          </div>
+        </div>
+
+        <!-- STEP 1: 상황 발견 -->
+        <div id="step-pane-1" class="step-pane active">
+          <div class="pane-title-box">
+            <span>1️⃣</span>
+            <h3>1단계: 무슨 일이 있었나요? (상황 발견)</h3>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">관련된 도덕 가치 선택하기:</label>
+            <div id="concept-chips" class="concept-select-chips">
+              <button class="chip-btn selected" data-concept="care">🤝 배려</button>
+              <button class="chip-btn" data-concept="honesty">💎 정직</button>
+              <button class="chip-btn" data-concept="responsibility">🌱 책임</button>
+              <button class="chip-btn" data-concept="fairness">⚖️ 공정</button>
+              <button class="chip-btn" data-concept="kindness">❤️ 친절/협동</button>
+              <button class="chip-btn" data-concept="selfcontrol">🧘‍♂️ 절제</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="input-step1" class="form-label">성찰하고 싶은 최근의 상황이나 행동을 솔직하게 적어보세요:</label>
+            <textarea id="input-step1" class="form-textarea" placeholder="예: 오늘 모둠활동 시간에 친구가 실수를 했을 때 짜증을 냈습니다. 친구가 당황했을 텐데 미안한 마음이 들었습니다."></textarea>
+          </div>
+
+          <div class="step-actions">
+            <div></div>
+            <button class="btn-primary" onclick="goToStep(2)">다음 단계 (마음 감지) ➡️</button>
+          </div>
+        </div>
+
+        <!-- STEP 2: 마음 감지 -->
+        <div id="step-pane-2" class="step-pane">
+          <div class="pane-title-box">
+            <span>2️⃣</span>
+            <h3>2단계: 당시의 감정과 마음 탐색하기</h3>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">당시 나의 감정 상태 선택하기 (여러 개 선택 가능):</label>
+            <div id="emotion-grid" class="emotion-grid">
+              <!-- Rendered via app.js -->
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="input-step2" class="form-label">상대방은 어떤 마음이었을지 입장을 바꾸어 생각해보세요:</label>
+            <textarea id="input-step2" class="form-textarea" placeholder="예: 내가 화를 냈을 때 친구는 속상하고 창피했을 것 같습니다. 자기도 잘하고 싶었을 텐데 내가 다그쳐서 위축되었을 것입니다."></textarea>
+          </div>
+
+          <div class="step-actions">
+            <button class="btn-secondary" onclick="goToStep(1)">⬅️ 이전 단계</button>
+            <button class="btn-primary" onclick="goToStep(3)">다음 단계 (도덕 성찰) ➡️</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: 도덕 성찰 (Scaffolding Sentence Builders) -->
+        <div id="step-pane-3" class="step-pane">
+          <div class="pane-title-box">
+            <span>3️⃣</span>
+            <h3>3단계: 도덕적 관점으로 성찰하기 (문장 비계 지원)</h3>
+          </div>
+
+          <!-- Scaffolding Box -->
+          <div class="scaffolding-box">
+            <div class="scaffolding-header">
+              <div class="scaffolding-title">💡 생각이 막힐 때는 '문장 비계 힌트'를 눌러보세요!</div>
+              <button class="btn-chatbot-scaffold" onclick="openChatbotTabWithPrompt('도덕적 성찰을 돕기 위해 비계 질문을 줘')">
+                🤖 AI 챗봇에게 비계 질문 요청하기
+              </button>
+            </div>
+            <div id="scaffold-starters-step3" class="starter-chips">
+              <!-- Rendered via app.js -->
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="input-step3" class="form-label">나의 행동을 도덕적 가치에 비추어 성찰해 보세요:</label>
+            <textarea id="input-step3" class="form-textarea" placeholder="위의 비계 힌트 버튼을 누르면 문장틀이 자동으로 들어갑니다!"></textarea>
+          </div>
+
+          <div class="step-actions">
+            <button class="btn-secondary" onclick="goToStep(2)">⬅️ 이전 단계</button>
+            <button class="btn-primary" onclick="goToStep(4)">다음 단계 (실천 다짐) ➡️</button>
+          </div>
+        </div>
+
+        <!-- STEP 4: 실천 다짐 -->
+        <div id="step-pane-4" class="step-pane">
+          <div class="pane-title-box">
+            <span>4️⃣</span>
+            <h3>4단계: 내일의 실천 다짐하기</h3>
+          </div>
+
+          <!-- Scaffolding Box -->
+          <div class="scaffolding-box" style="background: var(--primary-light); border-color: #A7F3D0;">
+            <div class="scaffolding-header">
+              <div class="scaffolding-title" style="color: var(--primary-dark);">🌱 다짐 문장 비계 (Action Starters)</div>
+            </div>
+            <div id="scaffold-starters-step4" class="starter-chips">
+              <!-- Rendered via app.js -->
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="input-step4" class="form-label">앞으로 비슷한 상황에서 어떻게 행동할 것인지 구체적으로 다짐하세요:</label>
+            <textarea id="input-step4" class="form-textarea" placeholder="예: 다음번에 친구가 실수를 하더라도 짜증 대신 '괜찮아! 차근차근 해보자'라고 용기를 북돋아 주겠습니다."></textarea>
+          </div>
+
+          <div class="step-actions">
+            <button class="btn-secondary" onclick="goToStep(3)">⬅️ 이전 단계</button>
+            <div style="display: flex; gap: 0.6rem;">
+              <button class="btn-secondary" onclick="printWorksheet()">🖨️ 인쇄/다운로드</button>
+              <button class="btn-primary" onclick="saveReflection()">💾 성찰 일지 저장하기</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TAB 3: Copilot Studio AI 챗봇 임베드 & 오류 해결 안내
+         ========================================================================== -->
+    <section id="tab-chatbot" class="tab-content">
+      <div class="page-banner" style="background: linear-gradient(135deg, #8338EC 0%, #4F46E5 100%);">
+        <h2 class="banner-title">AI 도덕 스캐폴딩 도우미 챗봇 🤖</h2>
+        <p class="banner-desc">
+          도덕적 문제나 성찰에 대해 궁금한 점을 질문해 보세요. AI 챗봇이 마음을 헤아리고 도덕적 성찰 비계를 도와줍니다.
+        </p>
+      </div>
+
+      <!-- Auth Troubleshooting Banner -->
+      <div class="auth-warning-banner">
+        <div class="auth-banner-title">
+          <span>⚙️</span> Copilot Studio 챗봇 권한 설정 안내 ("You don't have access" 오류 해결법)
+        </div>
+        <div class="auth-banner-desc">
+          챗봇 창에 <strong>"You don't have access to talk to this bot"</strong>이라는 메시지가 뜬다면 아래 순서로 Copilot Studio 설정을 변경해 주세요!
+          <ol style="margin-left: 1.5rem; margin-top: 0.4rem;">
+            <li><strong>Microsoft Copilot Studio</strong> (<a href="https://copilotstudio.microsoft.com" target="_blank" style="color: #4F46E5; font-weight: 700;">copilotstudio.microsoft.com</a>)에 접속합니다.</li>
+            <li>챗봇 편집 화면의 좌측 메뉴에서 <strong>[설정 (Settings)] ➡️ [보안 (Security)] ➡️ [인증 (Authentication)]</strong>을 클릭합니다.</li>
+            <li>인증 옵션을 <strong>'인증 없음 (No authentication)'</strong> 또는 <strong>'공개 (Public)'</strong>로 변경합니다.</li>
+            <li>상단 <strong>[게시 (Publish)]</strong> 버튼을 눌러 변경사항을 적용하시면 웹앱에서 누구나 로그인 없이 바로 대화할 수 있습니다!</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="chatbot-container-card">
+        <div class="chatbot-header-bar">
+          <div class="chatbot-title">
+            <span>💬</span> Microsoft Copilot Studio 도덕 성찰 챗봇
+          </div>
+          <div class="chatbot-subtitle">어린이용 안심 AI 도덕 스캐폴드</div>
+        </div>
+
+        <!-- Quick Prompt Suggestion Chips -->
+        <div class="quick-prompts-bar">
+          <span style="font-weight: 700; font-size: 0.85rem; color: #64748B; display: flex; align-items: center;">추천 질문:</span>
+          <button class="quick-prompt-chip" onclick="openChatbotTabWithPrompt('친구와 다퉜을 때 어떻게 사과해야 할까?')">🤝 사과하는 방법 물어보기</button>
+          <button class="quick-prompt-chip" onclick="openChatbotTabWithPrompt('거짓말을 했을 때 솔직하게 말할 용기를 줘')">💎 정직에 대해 대화하기</button>
+          <button class="quick-prompt-chip" onclick="openChatbotTabWithPrompt('모둠 과제에서 책임을 다하지 못했을 때 성찰 질문을 해줘')">🌱 책임감 비계 요청하기</button>
+          <button class="quick-prompt-chip" onclick="openChatbotTabWithPrompt('배려하는 마음을 키우려면 어떤 행동을 해야 하나요?')">❤️ 배려 실천 방법</button>
+        </div>
+
+        <!-- Embedded Microsoft Copilot Studio Iframe -->
+        <div class="iframe-wrapper">
+          <iframe 
+            src="https://copilotstudio.microsoft.com/environments/9324e73a-cd4e-e049-b7ba-177af6165e9c/bots/crbf2_bot_OORJCX/webchat?__version__=2&enableFileAttachment=false&cliAgent=true" 
+            frameborder="0">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TAB 4: 나의 성찰 기록장 & 칭찬 뱃지
+         ========================================================================== -->
+    <section id="tab-history" class="tab-content">
+      <div class="page-banner" style="background: linear-gradient(135deg, #FF9F1C 0%, #D97706 100%);">
+        <h2 class="banner-title">나의 성찰 기록장 & 칭찬 뱃지 🏅</h2>
+        <p class="banner-desc">
+          지속적인 도덕 성찰을 통해 성장한 나와 나의 성취 뱃지를 확인해 보세요!
+        </p>
+      </div>
+
+      <div class="history-section">
+        
+        <!-- Badges Grid Card -->
+        <div class="badges-card">
+          <div class="badges-header">
+            <span>🏆</span> 나의 도덕 성장 뱃지
+          </div>
+          <div id="badges-grid" class="badges-grid">
+            <!-- Rendered via app.js -->
+          </div>
+        </div>
+
+        <!-- History Log List -->
+        <div>
+          <div class="history-list-header">
+            <h3 style="font-family: 'Jua', sans-serif; font-size: 1.5rem; color: var(--primary-dark);">
+              📜 저장된 성찰 일지 목록
+            </h3>
+          </div>
+
+          <div id="history-cards-container" class="history-cards-container" style="margin-top: 1rem;">
+            <!-- Rendered via app.js -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Floating Chatbot Widget Button -->
+  <button id="floating-chatbot-btn" class="floating-chatbot-btn" title="AI 도덕 도우미 챗봇 열기">
+    🤖
+    <span class="badge-pulse"></span>
+  </button>
+
+  <!-- Floating Chatbot Modal Window -->
+  <div id="floating-chatbot-modal" class="floating-chatbot-modal">
+    <div class="modal-header">
+      <h4><span>🤖</span> Copilot Studio 도덕 도우미</h4>
+      <button id="close-modal-btn" class="close-modal-btn">&times;</button>
+    </div>
+    <div class="iframe-wrapper">
+      <iframe 
+        src="https://copilotstudio.microsoft.com/environments/9324e73a-cd4e-e049-b7ba-177af6165e9c/bots/crbf2_bot_OORJCX/webchat?__version__=2&enableFileAttachment=false&cliAgent=true" 
+        frameborder="0">
+      </iframe>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <p>© 2026 도덕 마인드 숲 - 초등 도덕 성찰 & 비계 학습 웹앱 | MS Copilot Studio AI Chatbot Powered</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

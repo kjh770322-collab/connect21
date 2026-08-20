@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>아뜰리에 AI - 초등 미술 감상·표현 AI Agent</title>
+  <meta name="description" content="초등학교 미술 감상과 표현을 체계적으로 돕는 10단계 AI 스캐폴딩 파트너">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <a href="#" class="logo-area">
+        <div class="logo-icon">🎨</div>
+        <div>
+          <h1 class="logo-title">아뜰리에 AI</h1>
+          <span class="logo-tag">초등 미술 감상·표현 AI Agent</span>
+        </div>
+      </a>
+      <div class="header-actions">
+        <a href="../index.html" class="home-link">🏠 홈으로</a>
+        <div style="font-family: 'Gowun Dodum'; font-weight: 700; color: var(--text-muted);">
+          🏫 초등 미술 수업 지원 시스템
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 10-Step Wizard Track -->
+  <div class="wizard-track-card">
+    <div id="wizard-track-container" class="wizard-track-container">
+      <!-- Rendered via app.js -->
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <!-- ==========================================================================
+         STEP 1: 취향 탐색 (미술 밸런스 게임)
+         ========================================================================== -->
+    <section id="step-pane-1" class="step-pane active">
+      <div class="step-banner">
+        <h2 class="step-banner-title">① 취향 탐색 밸런스 게임 ⚖️</h2>
+        <p class="step-banner-desc">내가 좋아하는 색감, 분위기, 표현 방식을 선택하며 나만의 미술 취향을 수집해 보아요!</p>
+      </div>
+
+      <div class="balance-game-box">
+        <h3 id="balance-q-title" class="balance-q-title">Q1. 마음에 드는 색감 분위기를 선택해봐!</h3>
+        
+        <div id="balance-options-grid" class="balance-options-grid">
+          <!-- Rendered via app.js -->
+        </div>
+
+        <div id="balance-result-card" class="balance-result-card" style="display: none;">
+          <div class="balance-result-title">🎉 나의 미술 취향 분석 카드</div>
+          <div id="balance-result-text" style="font-size: 1.15rem; color: #78350F;"></div>
+        </div>
+      </div>
+
+      <div class="pane-action-bar">
+        <div></div>
+        <button class="btn-next" onclick="goNext()">다음 단계: 작품 추천 ➡️</button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         STEP 2: 맞춤 작품 추천·선택
+         ========================================================================== -->
+    <section id="step-pane-2" class="step-pane">
+      <div class="step-banner" style="background: linear-gradient(135deg, #118AB2 0%, #073B4C 100%);">
+        <h2 class="step-banner-title">② 맞춤 작품 추천·선택 🖼️</h2>
+        <p class="step-banner-desc">너의 취향에 딱 맞는 명화 4선을 준비했어! 간단한 추천 이유를 읽고 마음에 드는 작품을 골라봐.</p>
+      </div>
+
+      <div id="masterpiece-grid" class="masterpiece-grid">
+        <!-- Rendered via app.js -->
+      </div>
+
+      <div class="pane-action-bar">
+        <button class="btn-prev" onclick="goPrev()">⬅️ 이전</button>
+        <button class="btn-next" onclick="goNext()">다음 단계: 함께 감상 연습 ➡️</button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         STEP 3: 함께하는 감상 연습 (Copilot Studio AI 챗봇 임베드)
+         ========================================================================== -->
+    <section id="step-pane-3" class="step-pane">
+      <div class="step-banner" style="background: linear-gradient(135deg, #8338EC 0%, #3A0CA3 100%);">
+        <h2 class="step-banner-title">③ 함께 감상 연습 | Microsoft Copilot Studio AI 🤖</h2>
+        <p class="step-banner-desc">Microsoft Copilot Studio 미술 감상 챗봇과 대화하며 6가지 관점(관찰, 재료, 색상, 요소, 원리, 느낌)으로 작품을 깊게 파헤쳐 봅시다!</p>
+      </div>
+
+      <!-- Selected Artwork Bar -->
+      <div id="guided-chat-header" class="chat-artwork-header" style="border-radius: var(--radius-md) var(--radius-md) 0 0;">
+        <!-- Rendered via app.js -->
+      </div>
+
+      <div class="copilot-invite-card">
+        <div class="copilot-invite-mascot" aria-hidden="true">🎨</div>
+        <h3>오른쪽 아래 팔레트 친구를 눌러 보세요!</h3>
+        <p>챗봇 창은 화면 구석에 숨어 있어요. 아이콘을 누르면 미술 도슨트가 나와서 함께 감상해 줘요. 아래 힌트를 누르면 질문이 복사돼요.</p>
+        <button class="btn-next" type="button" onclick="openArtChatbot()">팔레트 친구와 대화하기 🎨</button>
+        <div class="scaffold-prompt-chips" style="margin-top: 1rem; flex-wrap: wrap;">
+          <button class="prompt-hint-chip" onclick="copyCopilotPrompt('이 작품에서 가장 눈에 띄는 특징은 뭐야?')">👁️ 1. 관찰 내용 이야기하기</button>
+          <button class="prompt-hint-chip" onclick="copyCopilotPrompt('화가는 이 작품을 그릴 때 어떤 미술 재료와 기법을 사용했을까?')">🖌️ 2. 미술 재료·기법 물어보기</button>
+          <button class="prompt-hint-chip" onclick="copyCopilotPrompt('이 작품의 색감과 빛의 명암이 주는 느낌은 어때?')">🎨 3. 색의 3속성 및 명암 탐구</button>
+          <button class="prompt-hint-chip" onclick="copyCopilotPrompt('이 그림 속 점, 선, 면의 조형 요소와 분위기를 설명해줘')">📐 4. 조형 요소와 원리 질문하기</button>
+        </div>
+      </div>
+
+      <div class="pane-action-bar">
+        <button class="btn-prev" onclick="goPrev()">⬅️ 이전</button>
+        <button class="btn-next" onclick="goNext()">다음 단계: 스스로 감상 ➡️</button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         STEP 4: 스스로 감상 실전 (학생 주도 + Agent 지원)
+         ========================================================================== -->
+    <section id="step-pane-4" class="step-pane">
+      <div class="step-banner" style="background: linear-gradient(135deg, #06D6A0 0%, #048A65 100%);">
+        <h2 class="step-banner-title">④ 감상 실전 | 학생 주도 + Agent 지원 🔍</h2>
+        <p class="step-banner-desc">연습한 내용을 바탕으로 네가 직접 질문을 만들고 스스로 대답해 보는 시간이야!</p>
+      </div>
+
+      <div class="agent-chat-card">
+        <div id="student-led-chat-messages" class="chat-messages-area">
+          <!-- Chat Messages -->
+        </div>
+
+        <div class="chat-input-bar">
+          <div class="scaffold-prompt-chips">
+            <span style="font-weight: 700; font-size: 0.85rem; color: #64748B;">💡 추천 질문 힌트 예시:</span>
+            <button class="prompt-hint-chip" onclick="insertStudentLedQuestion('Q: 이 작품을 볼 때 마음에 가장 크게 와닿는 느낌은 무엇인가요? A: 살아서 움직이는 듯한 신비로운 느낌입니다.')">Q: 작품의 신비로운 느낌 탐구</button>
+            <button class="prompt-hint-chip" onclick="insertStudentLedQuestion('Q: 화가는 왜 이 색깔을 선택했을까요? A: 자신의 감정과 마음을 표현하기 위해서입니다.')">Q: 화가의 색채 의도 탐구</button>
+          </div>
+          <div class="chat-input-wrapper">
+            <input type="text" id="student-led-chat-input" class="chat-input-field" placeholder="[Q: 질문내용 A: 나의 답변] 형식으로 입력해보세요..." onkeydown="if(event.key==='Enter') sendStudentLedMessage()">
+            <button class="chat-send-btn" onclick="sendStudentLedMessage()">작성 완료 🚀</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pane-action-bar">
+        <button class="btn-prev" onclick="goPrev()">⬅️ 이전</button>
+        <button class="btn-next" onclick="goNext()">다음 단계: 감상문 합성 ➡️</button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         STEP 5: 나의 감상문 완성
+         ========================================================================== -->
+    <section id="step-pane-5" class="step-pane">
+      <div class="step-banner" style="background: linear-gradient(135deg, #FF9F1C 0%, #D97706 100%);">
+        <h2 class="step-banner-title">⑤ 나의 완성된 미술 감상문 📝</h2>
+        <p class="step-banner-desc">네가 나눈 대화 내용을 바탕으로 6대 감상 관점이 녹아든 멋진 미술 감상문이 완성되었어!</p>
+      </div>
+
+      <div style="background: white; padding: 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
+        <h3 style="font-family: 'Jua'; font-size: 1.5rem; color: var(--primary-art-dark); margin-bottom: 1rem;">
+          ✍️ 감상문 내용 검토 및 수정
+        </h3>
+        <textarea id="essay-preview-box" class="form-textarea" style="min-height: 320px; font-size: 1.05rem; line-height: 1.8;"></textarea>
+      </div>
+
+      <div class="pane-action-bar">
+        <button class="btn-prev" onclick="goPrev()">⬅️ 이전</button>
+        <button class="btn-next" onclick="goNext()">다음 단계: 해설 & 보완 ➡️</button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         STEP 6: 작품 해설 & 감상문 보완 ⭐
+         ========================================================================== -->
+    <section id="step-pane-6" class="step-pane">
+      <div class="step-banner" style="background: linear-gradient(135deg, #3A86FF 0%, #1D4ED8 100%);">
+        <h2 class="step-banner-title">⑥ 작품 해설 & 감상문 보완 ⭐</h2>
+        <p class="step-banner-desc">명화의 숨겨진 비하인드 스토리를 읽고, 감상문에 추가하고 싶은 내용을 보완해 보자!</p>
+      </div>
+
+      <div id="commentary-content-box">
+        <!-- Rendered via app.js -->
+      </div>
+
+      <div style="background: white; padding: 1.8rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); text-align: center;">
+        <h3 style="font-family: 'Jua'; font-size: 1.4rem; color: var(--text-main); margin-bottom: 1rem;">
+          해설을 읽고 감상문에 더 넣고 싶은 내용이 있나요?
+        </h3>
+        <div style="display: flex; justify-content: center; gap: 1rem;">
+          <button class="btn-next" style="background: #8338EC;" onclick="refineEssayWithCommentary()">✨ 네! 해설을 감상문에 추가할래요</button>
+          <button class="btn-prev" onclick="goNext()">👍 충분해요, 바로 결과 카드로!</button>
+        </div>
+      </div>
+
+      <div class="pane-action-bar">
+        <button class="btn-prev" onclick="goPrev()">⬅️ 이전</button>
+        <button class="btn-next" onclick="goNext()">다음 단계: 감상 결과 카드 ➡️</button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         STEP 7: 나의 감상 결과 카드 ⭐
+         ========================================================================== -->
+    <section id="step-pane-7" class="step-pane">
+      <div class="step-banner" style="background: linear-gradient(135deg, #FF006E 0%, #8338EC 100%);">
+        <h2 class="step-banner-title">⑦ 나의 감상 결과 카드 🏆</h2>
+        <p class="step-banner-desc">한 화면에서 나의 감상문, 선생님의 구체적인 칭찬 피드백, 한 걸음 더 질문을 확인하세요!</p>
+      </div>
+
+      <div id="result-card-display" class="result-card-container">
+        <!-- Rendered via app.js -->
+      </div>
+
+      <div class="pane-action-bar">
+        <button class="btn-prev" onclick="goPrev()">⬅️ 이전</button>
+        <button class="btn-next" onclick="goNext()">다음 단계: 표현 방법 탐색 ➡️</button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         STEP 8: 표현 방법 탐색·계획 (Student × Agent)
+         ========================================================================== -->
+    <section id="step-pane-8" class="step-pane">
+      <div class="step-banner" style="background: linear-gradient(135deg, #7209B7 0%, #3F37C9 100%);">
+        <h2 class="step-banner-title">⑧ 표현 방법 탐색·계획 💡</h2>
+        <p class="step-banner-desc">원작 명화를 바탕으로 나만의 새로운 미술 기법과 표현 방식을 탐색해 보자!</p>
+      </div>
+
+      <div id="expression-styles-grid" class="expression-style-grid">
+        <!-- Rendered via app.js -->
+      </div>
+
+      <div style="background: white; padding: 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
+        <h3 style="font-family: 'Jua'; font-size: 1.4rem; color: var(--primary-art-dark); margin-bottom: 1rem;">
+          🎨 나만의 표현 아이디어 구상 대화
+        </h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div>
+            <label style="font-weight: 700; color: var(--text-main);">🔒 유지하고 싶은 요소 (원작의 느낌):</label>
+            <input type="text" id="plan-keep-input" class="chat-input-field" style="width: 100%; margin-top: 0.3rem;" value="원작의 주요 구도와 형태의 선명함">
+          </div>
+          <div>
+            <label style="font-weight: 700; color: var(--text-main);">✨ 새롭게 바꿀 요소 (나의 아이디어):</label>
+            <input type="text" id="plan-change-input" class="chat-input-field" style="width: 100%; margin-top: 0.3rem;" value="색채 분위기와 주인공 캐릭터 재구성">
+          </div>
+          <div>
+            <label style="font-weight: 700; color: var(--text-main);">🖌️ 사용할 미술 재료 & 도구:</label>
+            <input type="text" id="plan-tools-input" class="chat-input-field" style="width: 100%; margin-top: 0.3rem;" value="크레파스 스크래치, 수채화 물감, 종이 붙이기">
+          </div>
+        </div>
+      </div>
+
+      <div class="pane-action-bar">
+        <button class="btn-prev" onclick="goPrev()">⬅️ 이전</button>
+        <button class="btn-next" onclick="goNext()">다음 단계: 제작 계획서 생성 ➡️</button>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         STEP 9: 시각적 표현 제작 계획서 생성
+         ========================================================================== -->
+    <section id="step-pane-9" class="step-pane">
+      <div class="step-banner" style="background: linear-gradient(135deg, #4CC9F0 0%, #4361EE 100%);">
+        <h2 class="step-banner-title">⑨ 시각적 표현 제작 계획서 📋</h2>
+        <p class="step-banner-desc">대화 내용을 바탕으로 완벽한 미술 표현 계획서가 생성되었습니다!</p>
+      </div>
+
+      <div id="plan-sheet-display" class="plan-sheet-card">
+        <!-- Rendered via app.js -->
+      </div>
+
+      <div class="pane-action-bar">
+        <button class="btn-prev" onclick="goPrev()">⬅️ 이전</button>
+        <div style="display: flex; gap: 0.6rem;">
+          <button class="btn-prev" style="color: var(--primary-art-dark);" onclick="printPlanSheet()">🖨️ 계획서 인쇄/다운로드</button>
+          <button class="btn-next" onclick="goNext()">다음 단계: 나만의 작품 제작 ➡️</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         STEP 10: 나만의 작품 제작 & 갤러리 🎨
+         ========================================================================== -->
+    <section id="step-pane-10" class="step-pane">
+      <div class="step-banner" style="background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);">
+        <h2 class="step-banner-title">⑩ 나만의 작품 제작 & 갤러리 🎨</h2>
+        <p class="step-banner-desc">계획서를 보며 웹 캔버스 스케치패드에 직접 그리거나, 완성한 실제 작품 사진을 갤러리에 등록하세요!</p>
+      </div>
+
+      <div class="canvas-section">
+        <!-- Toolbar -->
+        <div class="canvas-toolbar">
+          <span style="font-weight: 700;">색상:</span>
+          <button class="color-swatch-btn selected" style="background: #FF6B6B;" onclick="setCanvasColor('#FF6B6B')"></button>
+          <button class="color-swatch-btn" style="background: #FFD166;" onclick="setCanvasColor('#FFD166')"></button>
+          <button class="color-swatch-btn" style="background: #06D6A0;" onclick="setCanvasColor('#06D6A0')"></button>
+          <button class="color-swatch-btn" style="background: #118AB2;" onclick="setCanvasColor('#118AB2')"></button>
+          <button class="color-swatch-btn" style="background: #8338EC;" onclick="setCanvasColor('#8338EC')"></button>
+          <button class="color-swatch-btn" style="background: #000000;" onclick="setCanvasColor('#000000')"></button>
+
+          <span style="font-weight: 700; margin-left: 1rem;">굵기:</span>
+          <button class="tool-btn" onclick="setLineWidth(3)">얇게</button>
+          <button class="tool-btn active" onclick="setLineWidth(8)">보통</button>
+          <button class="tool-btn" onclick="setLineWidth(16)">두껍게</button>
+
+          <button class="tool-btn" style="margin-left: 1rem; color: #EF4444;" onclick="toggleEraser()">지우개 🧹</button>
+          <button class="tool-btn" onclick="clearCanvas()">전체 지우기 🗑️</button>
+        </div>
+
+        <input type="text" id="canvas-title-input" class="chat-input-field" style="width: 320px; text-align: center;" placeholder="나의 작품 제목을 적어주세요!">
+
+        <!-- Canvas -->
+        <canvas id="art-canvas"></canvas>
+
+        <button class="btn-next" onclick="saveCanvasToGallery()">🎨 작품 갤러리에 등록하기</button>
+      </div>
+
+      <!-- Gallery -->
+      <div style="margin-top: 3rem;">
+        <h3 style="font-family: 'Jua'; font-size: 1.8rem; color: var(--primary-art-dark); text-align: center;">
+          🏛️ 우리들의 미술 갤러리 전시장
+        </h3>
+        <div id="gallery-container" class="gallery-grid">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+
+      <div class="pane-action-bar">
+        <button class="btn-prev" onclick="goPrev()">⬅️ 이전</button>
+        <button class="btn-next" style="background: var(--art-green);" onclick="alert('🎉 축하합니다! 미술 감상과 표현 10단계를 완벽하게 수료하셨습니다!')">🎓 학습 완수 🏅</button>
+      </div>
+    </section>
+
+  </main>
+
+  <button id="floating-art-chatbot-btn" class="floating-chatbot-btn" type="button" title="미술 도슨트와 대화하기" aria-label="미술 도슨트 챗봇 열기">
+    <span class="fab-sparkle" aria-hidden="true">✦</span>
+    <svg class="palette-mascot" viewBox="0 0 88 88" aria-hidden="true">
+      <ellipse cx="40" cy="50" rx="30" ry="26" fill="#FFF7ED"/>
+      <circle cx="26" cy="42" r="6.2" fill="#FF6B6B"/>
+      <circle cx="40" cy="35" r="6.2" fill="#FFD166"/>
+      <circle cx="54" cy="42" r="6.2" fill="#06D6A0"/>
+      <circle cx="30" cy="58" r="5.6" fill="#8338EC"/>
+      <circle cx="46" cy="60" r="5.6" fill="#3A86FF"/>
+      <circle cx="28" cy="52" r="3.2" fill="#FFB4B4"/>
+      <circle cx="50" cy="52" r="3.2" fill="#FFB4B4"/>
+      <circle cx="35" cy="48" r="2.1" fill="#2B2D42"/>
+      <circle cx="45" cy="48" r="2.1" fill="#2B2D42"/>
+      <circle cx="35.7" cy="47.3" r="0.7" fill="#fff"/>
+      <circle cx="45.7" cy="47.3" r="0.7" fill="#fff"/>
+      <path d="M35 55 Q40 59 45 55" fill="none" stroke="#2B2D42" stroke-width="2" stroke-linecap="round"/>
+      <rect x="58" y="8" width="7" height="30" rx="3" transform="rotate(32 61 23)" fill="#E8C547"/>
+      <rect x="58" y="8" width="7" height="10" rx="3" transform="rotate(32 61 23)" fill="#8B5A2B"/>
+      <path d="M72 12 l8 -4 l2 8 z" fill="#FF6B6B"/>
+    </svg>
+    <span class="fab-label">도슨트</span>
+  </button>
+
+  <div id="floating-art-chatbot-modal" class="floating-chatbot-modal" hidden>
+    <div class="modal-header">
+      <h4>
+        <span class="modal-mini-mascot" aria-hidden="true">🎨</span>
+        우리학교 미술 도슨트
+      </h4>
+      <button id="close-art-modal-btn" class="close-modal-btn" type="button" aria-label="챗봇 닫기">&times;</button>
+    </div>
+    <div class="iframe-wrapper">
+      <iframe
+        id="art-copilot-frame"
+        title="미술 감상 코파일럿"
+        data-src="https://copilotstudio.microsoft.com/environments/9324e73a-cd4e-e049-b7ba-177af6165e9c/bots/crbf2_bot_Rv6Ihh/webchat?__version__=2&enableFileAttachment=false&cliAgent=true"
+        src="about:blank"
+        frameborder="0"></iframe>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <p>© 2026 아뜰리에 AI - 초등 미술 감상·표현 AI Agent 학습 도움 웹앱 | MS Copilot Studio Powered</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

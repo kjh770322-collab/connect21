@@ -12,6 +12,7 @@ const MASTERPIECES = [
     year: "1889년",
     period: "후기 인상주의",
     reason: "꿈틀거리는 요동치는 선과 강렬한 보라/노랑 대비가 네 감성과 딱 맞아!",
+    taste: ["B", "B", "B"],
     desc: "고흐가 생레미 요양원에서 밤하늘을 보며 그린 명화입니다. 소용돌이치는 불타는 듯한 밤하늘과 거대한 사이프러스 나무가 강렬한 마음의 회오리를 전해줍니다.",
     elements: "요동치는 곡선, 노랑과 파랑의 강한 명암 대비, 거친 물감 질감",
     img: "art image/1.png",
@@ -42,6 +43,7 @@ const MASTERPIECES = [
     year: "1899년",
     period: "인상주의",
     reason: "빛과 시간에 따라 살랑이는 몽환적인 자연의 색채를 좋아하는 너에게 추천해!",
+    taste: ["A", "A", "A"],
     desc: "모네가 지베르니 정원의 연못을 붓으로 담아낸 명작입니다. 햇살이 수면에 반사되어 시시각각 변화하는 다채로운 초록, 보라, 핑크빛 물결이 장관을 이룹니다.",
     elements: "부드러운 빛의 조화, 빛깔의 반사, 유연한 수평 곡선",
     img: "art image/2.png",
@@ -72,6 +74,7 @@ const MASTERPIECES = [
     year: "1884년",
     period: "신인상주의 (점묘법)",
     reason: "수만 개의 무수한 점을 찍어 만든 놀라운 정교함과 조화로움을 느껴봐!",
+    taste: ["A", "A", "B"],
     desc: "물감을 섞지 않고 순수한 색의 점을 찍어 빛을 표현한 '점묘법'의 대표작입니다. 일요일 오후 파리 시민들의 한가로운 휴식이 질서정연하게 표현되어 있습니다.",
     elements: "점묘 기법의 입자감, 명확한 수직·수평 구도, 평화로운 조화",
     img: "art image/3.png",
@@ -98,6 +101,7 @@ const MASTERPIECES = [
     year: "1953년",
     period: "한국 근대 미술",
     reason: "거칠고 역동적인 붓 터치 속에서 강인한 한국의 민족 정신과 힘이 느껴져!",
+    taste: ["B", "B", "A"],
     desc: "이중섭 화백의 대표작으로, 뼈가 굵고 힘찬 흰 소의 역동적 모습을 담아냈습니다. 힘든 시기에도 꺾이지 않는 강한 생명력과 정열이 붓질 하나하나에 녹아있습니다.",
     elements: "강렬한 에너지를 지닌 선, 굵은 질감, 주황과 흰색의 대비",
     img: "art image/4.png",
@@ -124,32 +128,34 @@ function renderMasterpieceVisual(mp) {
 }
 
 // Balance Game Questions Data
-const BALANCE_QUESTIONS = [
+const TASTE_ROUNDS = [
   {
     round: 1,
-    title: "Q1. 마음에 드는 색감 분위기를 선택해봐!",
-    optA: { emoji: "☀️", label: "따뜻하고 포근한 햇살 색감 (노랑, 주황, 핑크)" },
-    optB: { emoji: "🌊", label: "시원하고 깊은 밤하늘 색감 (파랑, 보라, 초록)" }
+    factor: "색감",
+    title: "1차. 어떤 색의 그림에 더 눈이 가나요?",
+    question: "어떤 색의 그림에 더 눈이 가나요?",
+    optA: { emoji: "🌸", label: "밝고 부드러운 색" },
+    optB: { emoji: "🔥", label: "진하고 강렬한 색" }
   },
   {
     round: 2,
-    title: "Q2. 더 흥미로운 그림 주제는 무엇인가요?",
-    optA: { emoji: "🌳", label: "아름다운 자연과 풍경이 담긴 그림" },
-    optB: { emoji: "👤", label: "사람들의 이야기와 생활이 그려진 그림" }
+    factor: "분위기",
+    title: "2차. 어떤 느낌의 그림을 더 보고 싶나요?",
+    question: "어떤 느낌의 그림을 더 보고 싶나요?",
+    optA: { emoji: "🌿", label: "편안하고 아름다운 그림" },
+    optB: { emoji: "🔮", label: "신기하고 상상하게 되는 그림" }
   },
   {
     round: 3,
-    title: "Q3. 더 좋아하는 붓 터치 표현 방식은?",
-    optA: { emoji: "🔍", label: "꼼꼼하고 부드러운 정교한 묘사" },
-    optB: { emoji: "🖌️", label: "거칠고 생동감 있는 역동적인 터치" }
-  },
-  {
-    round: 4,
-    title: "Q4. 끌리는 미술 재료 및 기법은?",
-    optA: { emoji: "🎨", label: "물감과 붓으로 그린 부드러운 그림" },
-    optB: { emoji: "🧩", label: "점찍기/콜라주 등 독특하고 특별한 기법" }
+    factor: "표현 방식",
+    title: "3차. 어떤 표현이 더 마음에 드나요?",
+    question: "어떤 표현이 더 마음에 드나요?",
+    optA: { emoji: "👀", label: "모습을 알아보기 쉬운 그림" },
+    optB: { emoji: "✨", label: "독특하게 바꾸어 표현한 그림" }
   }
 ];
+
+const BALANCE_QUESTIONS = TASTE_ROUNDS;
 
 // Expression Styles Data
 const EXPRESSION_STYLES = [
@@ -165,6 +171,7 @@ let currentStep = 1;
 let currentBalanceRound = 0;
 let balanceSelections = [];
 let selectedMasterpiece = MASTERPIECES[0];
+let recommendedMasterpieceId = MASTERPIECES[0].id;
 let selectedExpressionStyle = EXPRESSION_STYLES[0];
 
 // Step 3 Agent Guided Chat Messages Log
@@ -231,9 +238,17 @@ function updateStepView() {
 function jumpToStep(stepNum) {
   currentStep = stepNum;
   updateStepView();
+  if (stepNum === 2) {
+    recommendArtworkFromTaste();
+    renderMasterpieceGrid();
+    renderFocusArtwork();
+  }
 }
 
 function goNext() {
+  if (currentStep === 1) {
+    recommendArtworkFromTaste();
+  }
   if (currentStep < 10) {
     currentStep++;
     updateStepView();
@@ -283,8 +298,9 @@ function renderBalanceRound() {
     resultCard.style.display = "block";
 
     document.getElementById("balance-result-text").innerHTML = `
-      <strong>🎨 감성과 붓 터치를 사랑하는 낭만파 아티스트!</strong><br>
-      당신은 살아있는 빛과 깊이 있는 색채, 그리고 생동감 넘치는 표현을 소중히 생각하는 감각적인 초등 아티스트입니다!
+      <strong>🎨 나의 3차 월드컵 취향</strong><br>
+      ${getTasteSummary("<br>")}<br><br>
+      <strong>2단계에서 공부할 추천 작품:</strong> ${escapeHtml(recommendArtworkFromTaste().title)}
     `;
   }
 }
@@ -300,8 +316,12 @@ function renderMasterpieceGrid() {
   const container = document.getElementById("masterpiece-grid");
   if (!container) return;
 
-  container.innerHTML = MASTERPIECES.map(mp => `
-    <div class="masterpiece-card ${mp.id === selectedMasterpiece.id ? 'selected' : ''}" onclick="selectMasterpiece('${mp.id}')">
+  container.innerHTML = MASTERPIECES.map(mp => {
+    const isRecommended = mp.id === recommendedMasterpieceId;
+    const isSelected = mp.id === selectedMasterpiece.id;
+    return `
+    <div class="masterpiece-card ${isSelected ? 'selected' : ''} ${isRecommended ? 'highlighted' : 'dimmed'}" onclick="selectMasterpiece('${mp.id}')">
+      ${isRecommended ? '<div class="highlight-ribbon">✨ 취향 추천</div>' : ''}
       <div class="masterpiece-img-box">
         ${renderMasterpieceVisual(mp)}
       </div>
@@ -311,7 +331,15 @@ function renderMasterpieceGrid() {
         <div class="masterpiece-reason">💡 ${mp.reason}</div>
       </div>
     </div>
-  `).join("");
+  `;
+  }).join("");
+
+  const highlighted = container.querySelector(".masterpiece-card.highlighted");
+  if (highlighted && currentStep === 2) {
+    requestAnimationFrame(() => {
+      highlighted.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  }
 }
 
 function selectMasterpiece(id) {
@@ -319,12 +347,61 @@ function selectMasterpiece(id) {
   if (found) {
     selectedMasterpiece = found;
     renderMasterpieceGrid();
+    renderFocusArtwork();
   }
+}
+
+function recommendArtworkFromTaste() {
+  const picks = [0, 1, 2].map((i) => balanceSelections[i] || "A");
+  let best = MASTERPIECES[0];
+  let bestScore = -1;
+  MASTERPIECES.forEach((mp) => {
+    const score = (mp.taste || []).reduce((sum, value, i) => sum + (value === picks[i] ? 1 : 0), 0);
+    if (score > bestScore) {
+      bestScore = score;
+      best = mp;
+    }
+  });
+  selectedMasterpiece = best;
+  recommendedMasterpieceId = best.id;
+  return best;
+}
+
+function matchReasonText(mp) {
+  const labels = TASTE_ROUNDS.map((round, i) => {
+    const choice = balanceSelections[i] || mp.taste[i];
+    const text = choice === "B" ? round.optB.label : round.optA.label;
+    return `${round.factor}: ${text}`;
+  });
+  return labels.join(" · ");
+}
+
+function renderFocusArtwork() {
+  const box = document.getElementById("focus-artwork-card");
+  if (!box) return;
+  const mp = selectedMasterpiece;
+  box.innerHTML = `
+    <div class="focus-badge">오늘의 중점 작품</div>
+    <div class="focus-layout">
+      <div class="focus-visual">${renderMasterpieceVisual(mp)}</div>
+      <div class="focus-copy">
+        <h3>${escapeHtml(mp.title)}</h3>
+        <p class="focus-artist">${escapeHtml(mp.artist)} · ${escapeHtml(mp.year)}</p>
+        <p>${escapeHtml(mp.desc)}</p>
+        <p class="focus-match">왜 이 그림인가요? ${escapeHtml(matchReasonText(mp))}</p>
+        <button type="button" class="recommend-menu-btn primary" onclick="askRecommendBot('study')">이 작품, 도슨트와 공부하기</button>
+      </div>
+    </div>
+  `;
 }
 
 /* 4. Trigger logic when entering a step */
 function onEnterStep(stepNum) {
-  if (stepNum === 3) {
+  if (stepNum === 2) {
+    recommendArtworkFromTaste();
+    renderMasterpieceGrid();
+    renderFocusArtwork();
+  } else if (stepNum === 3) {
     initGuidedAgentChat();
   } else if (stepNum === 4) {
     initStudentLedChat();
@@ -743,14 +820,57 @@ function printPlanSheet() {
 function copyCopilotPrompt(promptText) {
   navigator.clipboard?.writeText(promptText).catch(() => {});
   openArtChatbot();
-  alert(`💡 대화 힌트:\n"${promptText}"\n\n오른쪽 아래 챗봇 창에 붙여 넣어 보세요!`);
+  alert(`💡 대화 힌트:\n"${promptText}"\n\n왼쪽 아래 챗봇 창에 붙여 넣어 보세요!`);
+}
+
+const ARTWORK_LIST_FOR_BOT = "별이 빛나는 밤(고흐), 수련 연못과 일본식 다리(모네), 그랑드 자트 섬의 일요일 오후(쇠라), 흰 소(이중섭)";
+
+function getTasteSummary(sep = " / ") {
+  return TASTE_ROUNDS.map((round, i) => {
+    const choice = balanceSelections[i];
+    const picked = choice === "A"
+      ? `A ${round.optA.label}`
+      : choice === "B"
+        ? `B ${round.optB.label}`
+        : "아직 고르지 않음";
+    return `${round.round}차 ${round.factor}(${round.question}) → ${picked}`;
+  }).join(sep);
+}
+
+function buildRecommendPrompt(kind) {
+  const rule = "너는 초등학생 미술 도슨트야. 쉬운 말로 말해.";
+  const works = `작품 4점: ${ARTWORK_LIST_FOR_BOT}`;
+  const worldcup = [
+    "1차 색감: 어떤 색의 그림에 더 눈이 가나요? A 밝고 부드러운 색 / B 진하고 강렬한 색",
+    "2차 분위기: 어떤 느낌의 그림을 더 보고 싶나요? A 편안하고 아름다운 그림 / B 신기하고 상상하게 되는 그림",
+    "3차 표현 방식: 어떤 표현이 더 마음에 드나요? A 모습을 알아보기 쉬운 그림 / B 독특하게 바꾸어 표현한 그림"
+  ].join("\n");
+
+  if (kind === "worldcup") {
+    return `${rule} 지금은 1단계야. ${works}\n3번의 이상형 월드컵을 한 질문씩 물어봐.\n${worldcup}\n세 답을 들으면 4점 중 성향에 가장 맞는 작품 딱 1점을 추천하고, 왜 맞는지 짧게 설명해. 2단계에서 그 작품만 중점적으로 공부한다고 안내해.`;
+  }
+  if (kind === 1 || kind === 2 || kind === 3) {
+    const round = TASTE_ROUNDS[kind - 1];
+    return `${rule} ${works}\n지금은 ${kind}차(${round.factor})만 물어봐. 질문: ${round.question} A ${round.optA.label} / B ${round.optB.label}.`;
+  }
+  if (kind === "study") {
+    const mp = selectedMasterpiece;
+    return `${rule} 지금은 2단계야. 학생이 중점적으로 공부할 작품은 《${mp.title}》(${mp.artist})이야. 관찰, 색, 느낌 질문을 하나씩 해서 이 작품만 깊게 공부하게 도와줘. 다른 작품으로 주제를 바꾸지 마.`;
+  }
+  const taste = getTasteSummary("\n");
+  const rec = recommendArtworkFromTaste();
+  return `${rule}\n${works}\n학생의 3번 월드컵 취향:\n${taste}\n이 취향에 맞는 작품 1점으로 《${rec.title}》을 추천해도 돼. 이유는 짧게, 2단계에서 이 그림을 중점 공부한다고 말해.`;
+}
+
+function askRecommendBot(kind) {
+  copyCopilotPrompt(buildRecommendPrompt(kind));
 }
 
 function loadArtCopilotFrame() {
   const frame = document.getElementById("art-copilot-frame");
   if (!frame) return;
-  const src = frame.getAttribute("data-src");
-  if (src && (!frame.src || frame.src === "about:blank" || frame.src.endsWith("about:blank"))) {
+  const src = "https://copilotstudio.microsoft.com/environments/9324e73a-cd4e-e049-b7ba-177af6165e9c/bots/crbf2_bot_Rv6Ihh/webchat?__version__=2&enableFileAttachment=false&cliAgent=true";
+  if (!frame.src || frame.src === "about:blank" || frame.src.endsWith("about:blank")) {
     frame.src = src;
   }
 }

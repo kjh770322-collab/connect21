@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <title>아뜰리에 AI - 초등 미술 감상·표현 AI Agent</title>
   <meta name="description" content="초등학교 미술 감상과 표현을 체계적으로 돕는 10단계 AI 스캐폴딩 파트너">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260820b">
 </head>
 <body>
 
@@ -43,12 +44,12 @@
          ========================================================================== -->
     <section id="step-pane-1" class="step-pane active">
       <div class="step-banner">
-        <h2 class="step-banner-title">① 취향 탐색 밸런스 게임 ⚖️</h2>
-        <p class="step-banner-desc">내가 좋아하는 색감, 분위기, 표현 방식을 선택하며 나만의 미술 취향을 수집해 보아요!</p>
+        <h2 class="step-banner-title">① 취향 이상형 월드컵 ⚖️</h2>
+        <p class="step-banner-desc">색감, 분위기, 표현 방식 3번의 대결로 내가 좋아하는 그림 느낌을 찾아 보아요!</p>
       </div>
 
       <div class="balance-game-box">
-        <h3 id="balance-q-title" class="balance-q-title">Q1. 마음에 드는 색감 분위기를 선택해봐!</h3>
+        <h3 id="balance-q-title" class="balance-q-title">1차. 어떤 색의 그림에 더 눈이 가나요?</h3>
         
         <div id="balance-options-grid" class="balance-options-grid">
           <!-- Rendered via app.js -->
@@ -57,6 +58,61 @@
         <div id="balance-result-card" class="balance-result-card" style="display: none;">
           <div class="balance-result-title">🎉 나의 미술 취향 분석 카드</div>
           <div id="balance-result-text" style="font-size: 1.15rem; color: #78350F;"></div>
+        </div>
+      </div>
+
+      <div class="recommend-bot-card">
+        <div class="recommend-bot-head">
+          <span class="recommend-bot-icon">🎨</span>
+          <div>
+            <h3>도슨트와 취향 찾기</h3>
+            <p>왼쪽 아래 챗봇, 또는 아래 메뉴로 3번 월드컵을 대화해요. 끝나면 2단계에서 작품 한 점을 중점적으로 공부해요.</p>
+          </div>
+        </div>
+
+        <div class="worldcup-table-wrap">
+          <table class="worldcup-table">
+            <thead>
+              <tr>
+                <th>단계</th>
+                <th>질문</th>
+                <th>A</th>
+                <th>B</th>
+                <th>판별 요소</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1차</td>
+                <td>어떤 색의 그림에 더 눈이 가나요?</td>
+                <td>🌸 밝고 부드러운 색</td>
+                <td>🔥 진하고 강렬한 색</td>
+                <td>색감</td>
+              </tr>
+              <tr>
+                <td>2차</td>
+                <td>어떤 느낌의 그림을 더 보고 싶나요?</td>
+                <td>🌿 편안하고 아름다운 그림</td>
+                <td>🔮 신기하고 상상하게 되는 그림</td>
+                <td>분위기</td>
+              </tr>
+              <tr>
+                <td>3차</td>
+                <td>어떤 표현이 더 마음에 드나요?</td>
+                <td>👀 모습을 알아보기 쉬운 그림</td>
+                <td>✨ 독특하게 바꾸어 표현한 그림</td>
+                <td>표현 방식</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="recommend-bot-menu">
+          <button type="button" class="recommend-menu-btn primary" onclick="askRecommendBot('worldcup')">🏆 도슨트와 월드컵 시작하기</button>
+          <button type="button" class="recommend-menu-btn" onclick="askRecommendBot(1)">1차 · 색감</button>
+          <button type="button" class="recommend-menu-btn" onclick="askRecommendBot(2)">2차 · 분위기</button>
+          <button type="button" class="recommend-menu-btn" onclick="askRecommendBot(3)">3차 · 표현 방식</button>
+          <button type="button" class="recommend-menu-btn" onclick="openArtChatbot()">왼쪽 아래 챗봇 열기</button>
         </div>
       </div>
 
@@ -71,10 +127,13 @@
          ========================================================================== -->
     <section id="step-pane-2" class="step-pane">
       <div class="step-banner" style="background: linear-gradient(135deg, #118AB2 0%, #073B4C 100%);">
-        <h2 class="step-banner-title">② 맞춤 작품 추천·선택 🖼️</h2>
-        <p class="step-banner-desc">너의 취향에 딱 맞는 명화 4선을 준비했어! 간단한 추천 이유를 읽고 마음에 드는 작품을 골라봐.</p>
+        <h2 class="step-banner-title">② 나만의 추천 작품 공부 🖼️</h2>
+        <p class="step-banner-desc">1단계에서 찾은 취향에 맞는 작품 한 점을 추천했어요. 이 그림을 중심으로 자세히 공부해 보세요.</p>
       </div>
 
+      <div id="focus-artwork-card" class="focus-artwork-card"></div>
+
+      <p class="other-works-label">다른 작품이 더 궁금하면 아래에서 바꿀 수 있어요.</p>
       <div id="masterpiece-grid" class="masterpiece-grid">
         <!-- Rendered via app.js -->
       </div>
@@ -101,8 +160,8 @@
 
       <div class="copilot-invite-card">
         <div class="copilot-invite-mascot" aria-hidden="true">🎨</div>
-        <h3>오른쪽 아래 팔레트 친구를 눌러 보세요!</h3>
-        <p>챗봇 창은 화면 구석에 숨어 있어요. 아이콘을 누르면 미술 도슨트가 나와서 함께 감상해 줘요. 아래 힌트를 누르면 질문이 복사돼요.</p>
+        <h3>왼쪽 아래 팔레트 친구를 눌러 보세요!</h3>
+        <p>챗봇 창은 왼쪽 아래에 있어요. 아이콘을 누르면 미술 도슨트가 나와서 함께 감상해 줘요. 아래 힌트를 누르면 질문이 복사돼요.</p>
         <button class="btn-next" type="button" onclick="openArtChatbot()">팔레트 친구와 대화하기 🎨</button>
         <div class="scaffold-prompt-chips" style="margin-top: 1rem; flex-wrap: wrap;">
           <button class="prompt-hint-chip" onclick="copyCopilotPrompt('이 작품에서 가장 눈에 띄는 특징은 뭐야?')">👁️ 1. 관찰 내용 이야기하기</button>
@@ -372,9 +431,9 @@
       <iframe
         id="art-copilot-frame"
         title="미술 감상 코파일럿"
-        data-src="https://copilotstudio.microsoft.com/environments/9324e73a-cd4e-e049-b7ba-177af6165e9c/bots/crbf2_bot_Rv6Ihh/webchat?__version__=2&enableFileAttachment=false&cliAgent=true"
-        src="about:blank"
-        frameborder="0"></iframe>
+        src="https://copilotstudio.microsoft.com/environments/9324e73a-cd4e-e049-b7ba-177af6165e9c/bots/crbf2_bot_Rv6Ihh/webchat?__version__=2&enableFileAttachment=false&cliAgent=true"
+        frameborder="0"
+        style="width: 100%; height: 100%; border: 0;"></iframe>
     </div>
   </div>
 
@@ -382,6 +441,6 @@
     <p>© 2026 아뜰리에 AI - 초등 미술 감상·표현 AI Agent 학습 도움 웹앱 | MS Copilot Studio Powered</p>
   </footer>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=20260820b"></script>
 </body>
 </html>
